@@ -4,7 +4,7 @@ import pytest
 from pydantic import ValidationError
 from pytest_mock import MockerFixture
 
-from zimran.settings import CommonSettings, Environment
+from zimran.config import CommonSettings, Environment
 
 SENTRY_DSN = 'https://public@sentry.example.com/1'
 
