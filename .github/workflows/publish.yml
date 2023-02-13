@@ -1,0 +1,19 @@
+name: Publish
+
+on:
+  release:
+    types: [ created ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - run: pip install setuptools wheel twine
+      - run: python setup.py
+#    - uses: pypa/gh-action-pypi-publish@release/v1
+#      with:
+#        password: ${{ secrets.PYPI_API_TOKEN }}
