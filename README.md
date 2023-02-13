@@ -1,6 +1,6 @@
 ## Installation
 ```bash
-pip install "git+https://github.com/zimran-tech/zimran-py-config"
+pip install zimran-config
 ```
 
 ## Usage
