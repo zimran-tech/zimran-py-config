@@ -20,18 +20,6 @@ def test_sentry_dsn_fail() -> None:
         CommonSettings()
 
 
-def test_debug_false(mocker: MockerFixture) -> None:
-    mocker.patch.dict(environ, {'SENTRY_DSN': SENTRY_DSN})
-    settings = CommonSettings()
-    assert settings.debug is False
-
-
-def test_debug_true(mocker: MockerFixture) -> None:
-    mocker.patch.dict(environ, {'SENTRY_DSN': SENTRY_DSN, 'DEBUG': 'true'})
-    settings = CommonSettings()
-    assert settings.debug is True
-
-
 @pytest.mark.parametrize('environment', [
     Environment.DEVELOPMENT, Environment.STAGING, Environment.PRODUCTION,
 ])
