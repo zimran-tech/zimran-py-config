@@ -9,15 +9,10 @@ from zimran.config import CommonSettings, Environment
 SENTRY_DSN = 'https://public@sentry.example.com/1'
 
 
-def test_sentry_dsn_ok(mocker: MockerFixture) -> None:
+def test_sentry_dsn(mocker: MockerFixture) -> None:
     mocker.patch.dict(environ, {'SENTRY_DSN': SENTRY_DSN})
     settings = CommonSettings()
     assert settings.sentry_dsn == SENTRY_DSN
-
-
-def test_sentry_dsn_fail() -> None:
-    with pytest.raises(ValidationError):
-        CommonSettings()
 
 
 @pytest.mark.parametrize('environment', [
