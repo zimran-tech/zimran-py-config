@@ -13,3 +13,6 @@ class CommonSettings(BaseSettings):
     debug: bool = False
     environment: Environment = Environment.DEVELOPMENT
     sentry_dsn: AnyUrl | None = None
+
+    class Config:
+        use_enum_values = True
