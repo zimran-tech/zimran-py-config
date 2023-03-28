@@ -12,4 +12,4 @@ class Environment(str, Enum):
 class CommonSettings(BaseSettings):
     debug: bool = False
     environment: Environment = Environment.DEVELOPMENT
-    sentry_dsn: AnyUrl = None
+    sentry_dsn: AnyUrl | None = None
