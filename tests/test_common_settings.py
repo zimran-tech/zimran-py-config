@@ -12,7 +12,7 @@ SENTRY_DSN = 'https://public@sentry.example.com/1'
 def test_sentry_dsn(mocker: MockerFixture) -> None:
     mocker.patch.dict(environ, {'SENTRY_DSN': SENTRY_DSN})
     settings = CommonSettings()
-    assert settings.sentry_dsn == SENTRY_DSN
+    assert str(settings.sentry_dsn) == SENTRY_DSN
 
 
 @pytest.mark.parametrize('environment', [
