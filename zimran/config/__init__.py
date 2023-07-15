@@ -1,6 +1,7 @@
 from enum import Enum
 
-from pydantic import AnyUrl, BaseSettings
+from pydantic import AnyUrl
+from pydantic_settings import BaseSettings
 
 
 class Environment(str, Enum):
