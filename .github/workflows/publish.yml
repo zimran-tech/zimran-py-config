@@ -1,17 +1,23 @@
 on:
   release:
-    types: [ created ]
+    types: [created]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - run: pip install build
-      - run: python -m build --sdist --wheel --outdir dist/ .
+          python-version: '3.12'
+      - name: Install build tools
+        run: pip install build
+      - name: Set version from tag
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: sed -i "s/__version__ = '.*'/__version__ = '$VERSION'/" zimran/config/__init__.py
+      - name: Build package
+        run: python -m build --sdist --wheel --outdir dist/ .
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
