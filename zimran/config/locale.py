@@ -1,8 +1,20 @@
-from enum import StrEnum
+import sys
 from functools import cached_property
 from typing import Any, Literal
 
 from pydantic import BaseModel, Field
+
+if sys.version_info >= (3, 11):
+    from enum import StrEnum
+
+else:
+    from enum import Enum
+
+    class StrEnum(str, Enum):
+        """Compatibility StrEnum for Python < 3.11"""
+
+        pass
+
 
 __all__ = ['DEFAULT_LOCALES', 'LocaleMetadata', 'LocaleConfig']
 
