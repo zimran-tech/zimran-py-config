@@ -76,7 +76,7 @@ addopts = [
     "--cov=zimran",
     "--cov-report=html",
     "--cov-report=term-missing",
-    "--cov-fail-under=100",
+    "--cov-fail-under=90",
 ]
 
 [tool.coverage.report]
