@@ -48,9 +48,6 @@ def main() -> None:
             github_token=github_token,
         )
 
-    _sync_readme(tech_docs_repo, service_name, github_token)
-    _sync_docs(tech_docs_repo, service_name, github_token)
-
     print(f"Docs of `{service_name}` service are synced successfully")
 
 
@@ -96,41 +93,6 @@ def _upload_json_to_github(
         github_token: str,
 ) -> None:
     _upload_file_to_github(repo, file_path, json.dumps(content), message, github_token)
-
-
-def _sync_readme(repo: str, service_name: str, github_token: str) -> None:
-    readme_path = Path("README.md")
-    if not readme_path.exists():
-        print("README.md not found", file=sys.stderr)
-        sys.exit(1)
-
-    content = readme_path.read_text()
-    file_path = f"docs/services/{service_name}/README.md"
-
-    _upload_file_to_github(
-        repo=repo,
-        file_path=file_path,
-        content=content,
-        message=f"Update README for {service_name}",
-        github_token=github_token,
-    )
-
-
-def _sync_docs(repo: str, service_name: str, github_token: str) -> None:
-    docs_pattern = "docs/**/*.md"
-    md_files = glob.glob(docs_pattern, recursive=True)
-
-    for md_file in md_files:
-        content = Path(md_file).read_text()
-        file_path = f"docs/services/{service_name}/{md_file}"
-
-        _upload_file_to_github(
-            repo=repo,
-            file_path=file_path,
-            content=content,
-            message=f"Update {md_file} for {service_name}",
-            github_token=github_token,
-        )
 
 
 def _upload_file_to_github(
