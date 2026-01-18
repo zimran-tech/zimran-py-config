@@ -15,4 +15,9 @@ setup(
     install_requires=['pydantic-settings==2.*'],
     python_requires='>=3.10',
     zip_file=False,
+    entry_points={
+        'console_scripts': [
+            'zimran-sync-api-docs=zimran.cli.sync_api_docs:main',
+        ],
+    },
 )
