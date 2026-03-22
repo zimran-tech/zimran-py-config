@@ -117,8 +117,7 @@ def _sync_readme(repo: str, service_name: str, github_token: str) -> None:
 
 
 def _sync_docs(repo: str, service_name: str, github_token: str) -> None:
-    docs_pattern = "docs/**/*.md"
-    md_files = glob.glob(docs_pattern, recursive=True)
+    md_files = glob.glob("docs/**/*.md", recursive=True) + glob.glob(".docs/**/*.md", recursive=True)
 
     for md_file in md_files:
         content = Path(md_file).read_text()
