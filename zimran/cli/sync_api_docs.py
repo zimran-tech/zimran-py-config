@@ -84,6 +84,10 @@ def _generate_asyncapi_docs(faststream_app: str) -> dict | None:
         with open(output_file, "r") as f:
             spec = json.load(f)
 
+    for server in spec.get("servers", {}).values():
+        if server.get("protocol") in ("amqp", "amqps"):
+            server["url"] = "***"
+
     print("AsyncAPI documentation generated")
     return spec
 
