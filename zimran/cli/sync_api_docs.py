@@ -84,6 +84,10 @@ def _generate_asyncapi_docs(faststream_app: str) -> dict | None:
         with open(output_file, "r") as f:
             spec = json.load(f)
 
+    for server in spec.get("servers", {}).values():
+        if server.get("protocol") in ("amqp", "amqps"):
+            server["url"] = "***"
+
     print("AsyncAPI documentation generated")
     return spec
 
@@ -117,8 +121,7 @@ def _sync_readme(repo: str, service_name: str, github_token: str) -> None:
 
 
 def _sync_docs(repo: str, service_name: str, github_token: str) -> None:
-    docs_pattern = "docs/**/*.md"
-    md_files = glob.glob(docs_pattern, recursive=True)
+    md_files = glob.glob("docs/**/*.md", recursive=True) + glob.glob(".docs/**/*.md", recursive=True)
 
     for md_file in md_files:
         content = Path(md_file).read_text()
